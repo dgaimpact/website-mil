@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Insight Lab™ — AI-Powered Book Intelligence for Mortgage Brokers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-light: #0f2240;
+    --navy-mid: #162a4a;
+    --blue: #4A9FD8;
+    --blue-dark: #2E5A7D;
+    --blue-glow: rgba(74, 159, 216, 0.15);
+    --green: #A4D65E;
+    --green-dark: #7FB842;
+    --white: #FFFFFF;
+    --gray-50: #F8FAFC;
+    --gray-100: #F1F5F9;
+    --gray-200: #E2E8F0;
+    --gray-300: #CBD5E1;
+    --gray-400: #94A3B8;
+    --gray-500: #64748B;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1E293B;
+    --amber: #F59E0B;
+    --amber-dark: #D97706;
+    --red: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--white);
+    background: var(--navy);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10, 22, 40, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(74, 159, 216, 0.12);
+    padding: 0 2rem;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-back {
+    color: var(--gray-400);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .nav-back:hover { color: var(--white); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gray-400);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--green) !important;
+    color: var(--navy) !important;
+    padding: 9px 22px;
+    border-radius: 8px;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--green-dark) !important;
+    transform: translateY(-1px);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 160px 2rem 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(74, 159, 216, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(164, 214, 94, 0.1);
+    border: 1px solid rgba(164, 214, 94, 0.3);
+    color: var(--green);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: pulse-badge 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(164, 214, 94, 0.15); }
+    50% { box-shadow: 0 0 20px 4px rgba(164, 214, 94, 0.1); }
+  }
+
+  .coming-soon-badge .dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--gray-400);
+    max-width: 620px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .hero-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    background: rgba(74, 159, 216, 0.08);
+    border: 1px solid rgba(74, 159, 216, 0.15);
+    padding: 12px 28px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+
+  .hero-price .amount {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--white);
+  }
+
+  .hero-price .period {
+    font-size: 0.95rem;
+    color: var(--gray-400);
+    font-weight: 500;
+  }
+
+  .hero-price .note {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-left: 4px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green);
+    color: var(--navy);
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(164, 214, 94, 0.2);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--gray-300);
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--blue);
+    color: var(--white);
+  }
+
+  .hero-trust {
+    margin-top: 40px;
+    font-size: 0.82rem;
+    color: var(--gray-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .hero-trust span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section {
+    padding: 100px 2rem;
+    position: relative;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--gray-400);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .section-desc.centered {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  /* ─── PROBLEM SECTION ─── */
+  .problem {
+    background: var(--navy-light);
+    border-top: 1px solid rgba(74, 159, 216, 0.08);
+    border-bottom: 1px solid rgba(74, 159, 216, 0.08);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .problem-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: rgba(74, 159, 216, 0.06);
+    border: 1px solid rgba(74, 159, 216, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .stat-card .number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 4px;
+  }
+
+  .stat-card .label {
+    font-size: 0.82rem;
+    color: var(--gray-400);
+    font-weight: 500;
+  }
+
+  /* ─── DASHBOARDS SECTION ─── */
+  .dashboards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .dash-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(74, 159, 216, 0.1);
+    border-radius: 14px;
+    padding: 28px 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dash-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .dash-card:hover {
+    border-color: rgba(74, 159, 216, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .dash-card:hover::before { opacity: 1; }
+
+  .dash-icon {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+  }
+
+  .dash-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .dash-card p {
+    font-size: 0.88rem;
+    color: var(--gray-400);
+    line-height: 1.6;
+  }
+
+  .dash-card .tier-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: 14px;
+  }
+
+  .tier-a { background: rgba(164, 214, 94, 0.12); color: var(--green); }
+  .tier-b { background: rgba(74, 159, 216, 0.12); color: var(--blue); }
+
+  /* ─── FEATURES SECTION ─── */
+  .features {
+    background: var(--navy);
+  }
+
+  .feature-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .tier-block {
+    background: var(--navy-light);
+    border: 1px solid rgba(74, 159, 216, 0.1);
+    border-radius: 16px;
+    padding: 36px;
+  }
+
+  .tier-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .tier-header .tier-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+  }
+
+  .tier-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .tier-header .count {
+    font-size: 0.82rem;
+    color: var(--gray-500);
+    margin-left: auto;
+  }
+
+  .tier-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .tier-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .tier-feature:hover { background: rgba(74, 159, 216, 0.05); }
+
+  .tier-feature .check {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .tier-feature .feat-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray-200);
+  }
+
+  .tier-feature .feat-desc {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    margin-top: 2px;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-it-works {
+    background: var(--navy-light);
+    border-top: 1px solid rgba(74, 159, 216, 0.08);
+    border-bottom: 1px solid rgba(74, 159, 216, 0.08);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .step {
+    text-align: center;
+    padding: 28px 20px;
+    position: relative;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(74, 159, 216, 0.1);
+    border: 1px solid rgba(74, 159, 216, 0.2);
+    color: var(--blue);
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+  }
+
+  .step h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .step p {
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    line-height: 1.6;
+  }
+
+  /* ─── TRUST SECTION ─── */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .trust-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(74, 159, 216, 0.1);
+    border-radius: 14px;
+    padding: 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .trust-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .trust-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .trust-card p {
+    font-size: 0.88rem;
+    color: var(--gray-400);
+    line-height: 1.6;
+  }
+
+  /* ─── RATE INTELLIGENCE BOT SPOTLIGHT ─── */
+  .spotlight {
+    background: var(--navy-light);
+    border-top: 1px solid rgba(74, 159, 216, 0.08);
+    border-bottom: 1px solid rgba(74, 159, 216, 0.08);
+  }
+
+  .spotlight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .channel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .channel {
+    background: rgba(74, 159, 216, 0.05);
+    border: 1px solid rgba(74, 159, 216, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .channel-badge {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .channel-a { background: rgba(164, 214, 94, 0.15); color: var(--green); }
+  .channel-b { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
+  .channel-c { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+
+  .channel h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .channel p {
+    font-size: 0.82rem;
+    color: var(--gray-400);
+    line-height: 1.5;
+  }
+
+  /* ─── SYNERGY SECTION ─── */
+  .synergy {
+    text-align: center;
+  }
+
+  .synergy-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+
+  .synergy-box {
+    background: var(--navy-light);
+    border: 1px solid rgba(74, 159, 216, 0.15);
+    border-radius: 16px;
+    padding: 32px 40px;
+    text-align: center;
+    min-width: 220px;
+  }
+
+  .synergy-box h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .synergy-box p {
+    font-size: 0.85rem;
+    color: var(--gray-400);
+  }
+
+  .synergy-arrow {
+    font-size: 1.8rem;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    text-align: center;
+    padding: 120px 2rem;
+    position: relative;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(164, 214, 94, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .cta-section p {
+    font-size: 1.05rem;
+    color: var(--gray-400);
+    margin-bottom: 36px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .cta-trust-bottom {
+    margin-top: 32px;
+    font-size: 0.82rem;
+    color: var(--gray-500);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid rgba(74, 159, 216, 0.08);
+    padding: 40px 2rem;
+    text-align: center;
+  }
+
+  .footer-brand {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray-300);
+    margin-bottom: 8px;
+  }
+
+  .footer-address {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    margin-bottom: 12px;
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--gray-600);
+  }
+
+  .footer-copy a {
+    color: var(--gray-500);
+    text-decoration: none;
+  }
+
+  .footer-copy a:hover { color: var(--blue); }
+
+  /* ─── ANIMATIONS ─── */
+  .animate-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .problem-grid,
+    .spotlight-grid { grid-template-columns: 1fr; }
+
+    .dashboards-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .steps { grid-template-columns: repeat(2, 1fr); }
+
+    .trust-grid { grid-template-columns: 1fr; }
+
+    .tier-features-grid { grid-template-columns: 1fr; }
+
+    .synergy-visual { flex-direction: column; gap: 16px; }
+    .synergy-arrow { transform: rotate(90deg); }
+  }
+
+  @media (max-width: 600px) {
+    .dashboards-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <img src="MIL - transparent background 200x200.svg" alt="Mortgage Insight Lab™" style="width: 36px; height: 36px; border-radius: 8px; background: white; padding: 2px;">
+    <span class="nav-name">Mortgage Insight Lab™</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="dgaimpact.html" class="nav-back">← DGA Impact Inc.™</a></li>
+    <li><a href="#dashboards">Dashboards</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#trust">Trust</a></li>
+    <li><a href="#cta" class="nav-cta">Get Notified →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="coming-soon-badge animate-in">
+    <span class="dot"></span>
+    Coming Soon — 2026
+  </div>
+  <h1 class="animate-in">Your Book of Business,<br><span class="accent">Decoded by AI.</span></h1>
+  <p class="hero-sub animate-in">Mortgage Insight Lab™ connects to your loan origination system and turns your existing client data into actionable intelligence — renewal risks, refinance opportunities, dormant recoveries, and niche specializations you didn't know you had.</p>
+  <div class="hero-price animate-in">
+    <span class="amount">$199</span>
+    <span class="period">CAD / month</span>
+    <span class="note">· no setup fee</span>
+  </div>
+  <div class="hero-cta-group animate-in">
+    <a href="mailto:mil-info@dgaimpact.com?subject=MIL%20Early%20Access%20Interest" class="btn-primary">Join the Waitlist →</a>
+    <a href="#dashboards" class="btn-secondary">See What's Coming</a>
+  </div>
+  <div class="hero-trust animate-in">
+    <span>✓ Read-only — never writes to your LOS</span>
+    <span>✓ Canadian data residency</span>
+    <span>✓ Your data, your book, always</span>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-inner">
+    <div class="problem-grid">
+      <div>
+        <p class="section-label animate-in">The Problem</p>
+        <h2 class="section-title animate-in">Brokers Are Sitting on a Goldmine<br>They Never Analyze</h2>
+        <p class="section-desc animate-in">Your LOS stores data. It doesn't think about it. You'd need hours of CSV exports and spreadsheet work to find what MIL surfaces automatically — and most brokers never find it at all.</p>
+        <p class="section-desc animate-in" style="margin-bottom: 0">MIL eliminates the CSV export → spreadsheet analysis → manual interpretation cycle. <strong style="color: var(--white)">The AI does the thinking. The broker does the acting.</strong></p>
+      </div>
+      <div class="problem-stats animate-in">
+        <div class="stat-card">
+          <div class="number">25K+</div>
+          <div class="label">Active mortgage professionals in Canada</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">✓</div>
+          <div class="label">Newton Velocity integration first — more LOS platforms planned</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">80%</div>
+          <div class="label">of book intelligence goes unanalyzed</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">0</div>
+          <div class="label">existing tools that do this</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 DASHBOARDS -->
+<section id="dashboards">
+  <div class="section-inner">
+    <p class="section-label animate-in">The Experience</p>
+    <h2 class="section-title animate-in">9 Intelligence Dashboards</h2>
+    <p class="section-desc animate-in">Each dashboard solves a specific problem brokers face daily. In production, every number is pulled from your actual book via your LOS API. No CSV exports. No spreadsheets.</p>
+
+    <div class="dashboards-grid">
+      <div class="dash-card animate-in">
+        <div class="dash-icon">📊</div>
+        <h3>Book Health Score</h3>
+        <p>A composite business health metric — like a credit score for your practice. Concentration, renewal pipeline, dormancy, rate exposure, lender diversity, all scored.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">💎</div>
+        <h3>Living Book Valuation</h3>
+        <p>Real-time valuation using a multiplier model (1.5x–3.5x trailing revenue). Know what your book is worth before you need to sell it — and how to increase it.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">🎯</div>
+        <h3>Opportunity Engine</h3>
+        <p>AI continuously scans your book for refinance candidates, trigger rate thresholds, stalled files, rate-beat scenarios, and cross-sell opportunities. Prioritized by revenue impact.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">⚠️</div>
+        <h3>Portfolio Risk Alerts</h3>
+        <p>Proactive warnings — concentration risk, maturity clustering, rate type imbalance, geographic concentration. Color-coded severity with remediation steps.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">🏆</div>
+        <h3>Niche Scorecard</h3>
+        <p>Detects natural specializations in your book and scores them. Discover where you have a data-backed niche versus where you think you do. Specialize with proof.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">📅</div>
+        <h3>Renewal &amp; Client Pipeline</h3>
+        <p>Visual timeline of upcoming renewals (12, 6, 3 months out) with outreach triggers. Pipeline health, deal velocity, bottlenecks, and dormant client recovery.</p>
+        <span class="tier-badge tier-b">Enhanced Value</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">📈</div>
+        <h3>Seasonal Intelligence</h3>
+        <p>Historical seasonality with AI overlay — pattern recognition, predictive forecasts for 3–6 months, capacity planning hints, and anonymized benchmarking.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">🏛️</div>
+        <h3>Macro Rate Correlation</h3>
+        <p>Real BoC overnight rate data, GoC bond yields, US Treasury yields, and mortgage rate tracking. Educational context with client-level impact actions.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">🤖</div>
+        <h3>Rate Intelligence Bot</h3>
+        <p>Auto-parsed lender rate sheets from your email. A/B/C channel routing cross-references against your book for instant opportunities. Your personal rate library.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATE INTELLIGENCE BOT SPOTLIGHT -->
+<section class="spotlight" id="rate-bot">
+  <div class="section-inner">
+    <div class="spotlight-grid">
+      <div>
+        <p class="section-label animate-in">Spotlight Feature</p>
+        <h2 class="section-title animate-in">Rate Intelligence Bot</h2>
+        <p class="section-desc animate-in">Connect your email (Gmail OAuth, read-only). Tag each approved lender to a channel. MIL parses rate sheets automatically and cross-references against your book — surfacing opportunities the moment rates change.</p>
+      </div>
+      <div class="channel-list animate-in">
+        <div class="channel">
+          <span class="channel-badge channel-a">A-CH</span>
+          <div>
+            <h4>Prime Channel</h4>
+            <p>Major banks, monolines, credit unions. Rates match against active clients for renewal, refinance, and rate-beat opportunities.</p>
+          </div>
+        </div>
+        <div class="channel">
+          <span class="channel-badge channel-b">B-CH</span>
+          <div>
+            <h4>Alt / Near-Prime</h4>
+            <p>Alt-A lenders with expanded guidelines. Matches against declined files and clients who didn't qualify at prime.</p>
+          </div>
+        </div>
+        <div class="channel">
+          <span class="channel-badge channel-c">C-CH</span>
+          <div>
+            <h4>Private Channel</h4>
+            <p>Private lenders, MICs, bridge financing. Matches against urgent bridge needs, debt consolidation, and short-term solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL FEATURE ROADMAP -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <p class="section-label animate-in">Full Feature Roadmap</p>
+    <h2 class="section-title animate-in">Everything MIL Will Do</h2>
+    <p class="section-desc animate-in">Three tiers of intelligence — from AI-driven insights no LOS provides, to enhanced versions of existing tools, to the table stakes every broker expects.</p>
+
+    <div class="feature-tiers">
+      <!-- TIER A -->
+      <div class="tier-block animate-in">
+        <div class="tier-header">
+          <span class="tier-label tier-a">Tier A</span>
+          <h3>Primary Differentiation</h3>
+          <span class="count">16 features + Niche Development Strategy</span>
+        </div>
+        <div class="tier-features-grid">
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Book Health Score</div>
+              <div class="feat-desc">Composite business health metric with drill-down</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Broker Benchmarking</div>
+              <div class="feat-desc">Anonymized platform-wide comparison</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Rate Impact Analysis</div>
+              <div class="feat-desc">Live rate changes crossed against your book</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Opportunity Detection Engine</div>
+              <div class="feat-desc">Continuous AI scan for actionable opportunities</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Portfolio Risk Alerts</div>
+              <div class="feat-desc">Concentration, clustering, and imbalance warnings</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Predictive Revenue Forecasting</div>
+              <div class="feat-desc">3/6/12 month projections from book + pipeline</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">White-Label Client Reports</div>
+              <div class="feat-desc">Broker-branded PDFs for annual reviews</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Seasonal Intelligence</div>
+              <div class="feat-desc">Seasonality patterns with predictive forecasts</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Dormant Client Recovery</div>
+              <div class="feat-desc">AI-prioritized re-engagement by opportunity value</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Macro Intelligence Engine</div>
+              <div class="feat-desc">BoC/bond monitoring → client-level actions</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Rate Correlation Timeline</div>
+              <div class="feat-desc">Interactive multi-line chart with real rate data</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Rate Intelligence Bot</div>
+              <div class="feat-desc">Auto-parsed lender rate sheets with A/B/C routing</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Living Book Valuation</div>
+              <div class="feat-desc">Real-time multiplier-based book valuation</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Lost Deal Reactivation</div>
+              <div class="feat-desc">Dead files re-evaluated against changed conditions</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">No-Contact Client Recovery</div>
+              <div class="feat-desc">Missing-info clients turned into prioritized call lists</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Multi-File Lifecycle Intelligence</div>
+              <div class="feat-desc">Unified client timelines with predictive next-action</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER B -->
+      <div class="tier-block animate-in">
+        <div class="tier-header">
+          <span class="tier-label tier-b">Tier B</span>
+          <h3>Enhanced Value</h3>
+          <span class="count">6 features</span>
+        </div>
+        <div class="tier-features-grid">
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Renewal Countdown Dashboard</div>
+              <div class="feat-desc">Visual timeline with automated outreach triggers</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Client Lifecycle Triggers</div>
+              <div class="feat-desc">Anniversary dates, equity milestones, maturity clustering</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Pipeline Health Tracker</div>
+              <div class="feat-desc">Deal velocity, bottleneck detection, probability of close</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Lender Mix Analysis</div>
+              <div class="feat-desc">Volume breakdown by lender with trend and risk context</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Automated Follow-Up Sequences</div>
+              <div class="feat-desc">Context-aware email/text triggered by lifecycle events</div>
+            </div>
+          </div>
+          <div class="tier-feature">
+            <span class="check">✓</span>
+            <div>
+              <div class="feat-name">Deal Velocity Tracking</div>
+              <div class="feat-desc">Submission-to-close timing and lender speed comparison</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how-it-works">
+  <div class="section-inner">
+    <p class="section-label animate-in" style="text-align: center">How It Works</p>
+    <h2 class="section-title animate-in" style="text-align: center">Connect Once. Intelligence Forever.</h2>
+    <p class="section-desc centered animate-in">MIL is a read-only intelligence layer on top of your existing LOS. It never replaces your LOS, never writes back, never modifies your records.</p>
+
+    <div class="steps">
+      <div class="step animate-in">
+        <div class="step-num">01</div>
+        <h3>Connect Your LOS</h3>
+        <p>Link your Newton Velocity account — additional LOS integrations (Scarlett, Filogix) are planned. One-time setup, continuous sync. MIL uses an adapter pattern — adding a new LOS is a new connector, not a rebuild.</p>
+      </div>
+      <div class="step animate-in">
+        <div class="step-num">02</div>
+        <h3>Data Normalizes</h3>
+        <p>Client records, deal details, mortgage terms, rates, property info — all normalized into MIL's universal schema. Your LOS remains the source of truth.</p>
+      </div>
+      <div class="step animate-in">
+        <div class="step-num">03</div>
+        <h3>AI Analyzes</h3>
+        <p>Every dashboard populates automatically. Opportunities surface, risks flag, niches reveal themselves. No CSV exports, no manual uploads, no spreadsheets.</p>
+      </div>
+      <div class="step animate-in">
+        <div class="step-num">04</div>
+        <h3>You Act</h3>
+        <p>Prioritized action queues with estimated revenue impact. Every insight is explainable — not a black box. You decide what to act on and when.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST ARCHITECTURE -->
+<section id="trust">
+  <div class="section-inner">
+    <p class="section-label animate-in">Trust Architecture</p>
+    <h2 class="section-title animate-in">Your Data Is Sacred. We Built It That Way.</h2>
+    <p class="section-desc animate-in">Trust isn't a policy at MIL — it's an architectural constraint. We literally cannot see your client data.</p>
+
+    <div class="trust-grid">
+      <div class="trust-card animate-in">
+        <div class="trust-icon">🔒</div>
+        <div>
+          <h3>Zero-Access Architecture</h3>
+          <p>Every broker's data lives in its own isolated tenant. There is no admin "god view" — not for support, not for engineers, not for the founder. Support uses anonymized record IDs only. This isn't a policy — the access literally doesn't exist.</p>
+        </div>
+      </div>
+      <div class="trust-card animate-in">
+        <div class="trust-icon">🇨🇦</div>
+        <div>
+          <h3>Canadian Data Residency</h3>
+          <p>All data stored on Canadian servers. PIPEDA compliant. Your client data never leaves the country.</p>
+        </div>
+      </div>
+      <div class="trust-card animate-in">
+        <div class="trust-icon">🚪</div>
+        <div>
+          <h3>Clean Exit Guarantee</h3>
+          <p>Full data export + certified deletion within 30 days on cancellation. No hostage data. No retention games. You leave, your data leaves with you.</p>
+        </div>
+      </div>
+      <div class="trust-card animate-in">
+        <div class="trust-icon">📋</div>
+        <div>
+          <h3>Data Protection Certificate</h3>
+          <p>Plain-language, broker-facing, downloadable from your dashboard. Not buried in legal terms — front and center where you can find it.</p>
+        </div>
+      </div>
+      <div class="trust-card animate-in">
+        <div class="trust-icon">🛑</div>
+        <div>
+          <h3>Do Not Contact</h3>
+          <p>Per-client flag that permanently overrides all outreach logic. Once flagged, that client never appears in any alert, campaign, or action queue. Your judgment is final.</p>
+        </div>
+      </div>
+      <div class="trust-card animate-in">
+        <div class="trust-icon">👁️</div>
+        <div>
+          <h3>Read-Only. Always.</h3>
+          <p>MIL never writes to your LOS. Never modifies, deletes, or creates records. Your LOS remains the source of truth. MIL is an observer — it watches, finds patterns, and tells you what to do.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYNERGY -->
+<section class="synergy">
+  <div class="section-inner">
+    <p class="section-label animate-in">Better Together</p>
+    <h2 class="section-title animate-in">MIL + Authority Hub™</h2>
+    <p class="section-desc centered animate-in">MIL works standalone — but paired with Authority Hub™, your book intelligence feeds your AI visibility. MIL discovers who you really are. Authority Hub™ tells the world.</p>
+
+    <div class="synergy-visual animate-in">
+      <div class="synergy-box">
+        <h3>Mortgage Insight Lab™</h3>
+        <p>Discovers your data-backed niches, specializations, and market strengths</p>
+      </div>
+      <span class="synergy-arrow">→</span>
+      <div class="synergy-box">
+        <h3>Authority Hub™</h3>
+        <p>Generates AI authority content from real operational intelligence</p>
+      </div>
+      <span class="synergy-arrow">→</span>
+      <div class="synergy-box" style="border-color: rgba(164, 214, 94, 0.25);">
+        <h3 style="color: var(--green)">AI Recommends You</h3>
+        <p>Content backed by real data = stronger authority signals</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <h2 class="animate-in">Be First to Know</h2>
+  <p class="animate-in">Mortgage Insight Lab™ is in development. Join the waitlist and we'll notify you when early access opens.</p>
+  <div class="hero-cta-group animate-in">
+    <a href="mailto:mil-info@dgaimpact.com?subject=MIL%20Waitlist%20-%20Early%20Access" class="btn-primary">Join the Waitlist →</a>
+    <a href="mailto:mil-info@dgaimpact.com?subject=MIL%20Discovery%20Call" class="btn-secondary">Book a Discovery Call</a>
+  </div>
+  <p class="cta-trust-bottom animate-in">No commitment · Built for Canadian mortgage brokers · Your data, your book, always.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Mortgage Insight Lab™ — A product of DGA Impact Inc.™</div>
+  <div class="footer-address">7190 Morrison Street · Niagara Falls, ON L2E 7K5 · Canada</div>
+  <div class="footer-copy">
+    © 2026 DGA Impact Inc.™ All rights reserved. · <a href="mailto:mil-info@dgaimpact.com">mil-info@dgaimpact.com</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => { entry.target.classList.add('visible'); }, index * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
+</body>
+</html>
