@@ -991,6 +991,119 @@
   }
   .footer-legal a:hover { color: var(--gray-400); }
 
+
+  /* ─── BUT WAIT THERE'S MORE — Accordion ─── */
+  .more-accordion {
+    margin-top: 48px;
+    background: var(--navy-light);
+    border: 1px solid rgba(164, 214, 94, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .more-accordion:hover {
+    border-color: rgba(164, 214, 94, 0.4);
+  }
+
+  .more-accordion.open {
+    border-color: rgba(164, 214, 94, 0.4);
+  }
+
+  .more-trigger {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--white);
+    transition: background 0.2s;
+  }
+
+  .more-trigger:hover {
+    background: rgba(164, 214, 94, 0.04);
+  }
+
+  .more-trigger-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .more-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  .more-sub {
+    font-size: 0.88rem;
+    color: var(--green);
+    font-weight: 500;
+  }
+
+  .more-caret {
+    font-size: 1.8rem;
+    color: var(--green);
+    font-weight: 300;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .more-accordion.open .more-caret {
+    transform: rotate(45deg);
+  }
+
+  .more-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s;
+    padding: 0 32px;
+  }
+
+  .more-accordion.open .more-content {
+    max-height: 3000px;
+    padding: 0 32px 32px;
+  }
+
+  .more-tier {
+    border-top: 1px solid rgba(74, 159, 216, 0.1);
+    padding-top: 28px;
+    margin-top: 28px;
+  }
+
+  .more-tier:first-child {
+    border-top: none;
+    padding-top: 8px;
+    margin-top: 0;
+  }
+
+  .more-tier-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .more-tier-header h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .more-tier-header .count {
+    font-size: 0.82rem;
+    color: var(--gray-500);
+    margin-left: auto;
+  }
+
   /* ─── ANIMATIONS ─── */
   .animate-in {
     opacity: 0;
@@ -1182,18 +1295,60 @@
   </div>
 </section>
 
-<!-- 9 DASHBOARDS -->
+<!-- INSIDE MIL — Revenue-ranked dashboards + accordion -->
 <section id="dashboards">
   <div class="section-inner">
-    <p class="section-label animate-in">The Experience</p>
-    <h2 class="section-title animate-in">9 Intelligence Dashboards</h2>
-    <p class="section-desc animate-in">Each dashboard answers a specific question brokers ask their own book every day — the kind of question your spreadsheet will never answer in time.</p>
+    <p class="section-label animate-in">Inside MIL</p>
+    <h2 class="section-title animate-in">The 9 Features That Will Change Your Business First</h2>
+    <p class="section-desc animate-in">Ranked by revenue impact — the dashboards brokers will reach for first. Each one answers a question your spreadsheet will never answer in time.</p>
 
     <div class="dashboards-grid">
       <div class="dash-card animate-in">
-        <div class="dash-icon">📊</div>
-        <h3>Book Health Score</h3>
-        <p>A composite business health metric — like a credit score for your practice. Concentration, renewal pipeline, dormancy, rate exposure, lender diversity, all scored.</p>
+        <div class="dash-icon">🎯</div>
+        <h3>Opportunity Detection Engine</h3>
+        <p>Continuous AI scan across your book for refinance candidates, trigger rate thresholds, rate-beat scenarios, stalled files, and cross-sell opportunities — prioritized by revenue impact.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">⚡</div>
+        <h3>Rate Impact Analysis</h3>
+        <p>The moment BoC moves or a lender repositions, MIL surfaces the exact list of clients affected — renewal, refinance, rate-beat. Act in minutes, not days.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">🤖</div>
+        <h3>Rate Intelligence Bot</h3>
+        <p>Auto-parsed lender rate sheets from your email. A/B/C channel routing cross-references against your book for instant opportunities. Your personal rate library.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">💤</div>
+        <h3>Dormant Client Recovery</h3>
+        <p>AI-prioritized re-engagement list for clients who've gone quiet — ranked by opportunity value, not alphabetically. The highest-ROI outreach list in your business.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">♻️</div>
+        <h3>Lost Deal Reactivation</h3>
+        <p>Dead files re-evaluated against today's rate, lender, and qualification conditions. The deal that died in 2024 may close in 2026 — MIL tells you which ones.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">📞</div>
+        <h3>No-Contact Client Recovery</h3>
+        <p>Clients with missing or stale contact info turned into prioritized call lists. Found-money revenue from the segment of your book you've been writing off.</p>
+        <span class="tier-badge tier-a">Core Intelligence</span>
+      </div>
+
+      <div class="dash-card animate-in">
+        <div class="dash-icon">🧬</div>
+        <h3>Multi-File Lifecycle Intelligence</h3>
+        <p>Unified client timelines across every file they've had with you, with predictive next-action signals. Repeat revenue across a client's 20-year lifecycle.</p>
         <span class="tier-badge tier-a">Core Intelligence</span>
       </div>
 
@@ -1205,52 +1360,136 @@
       </div>
 
       <div class="dash-card animate-in">
-        <div class="dash-icon">🎯</div>
-        <h3>Opportunity Engine</h3>
-        <p>AI continuously scans your book for refinance candidates, trigger rate thresholds, stalled files, rate-beat scenarios, and cross-sell opportunities. Prioritized by revenue impact.</p>
+        <div class="dash-icon">📊</div>
+        <h3>Book Health Score</h3>
+        <p>A composite business health metric — like a credit score for your practice. Concentration, renewal pipeline, dormancy, rate exposure, lender diversity, all scored.</p>
         <span class="tier-badge tier-a">Core Intelligence</span>
       </div>
+    </div>
 
-      <div class="dash-card animate-in">
-        <div class="dash-icon">⚠️</div>
-        <h3>Portfolio Risk Alerts</h3>
-        <p>Proactive warnings — concentration risk, maturity clustering, rate type imbalance, geographic concentration. Color-coded severity with remediation steps.</p>
-        <span class="tier-badge tier-a">Core Intelligence</span>
-      </div>
+    <!-- BUT WAIT, THERE'S MORE — Accordion -->
+    <div class="more-accordion animate-in" id="moreFeatures">
+      <button class="more-trigger" onclick="document.getElementById('moreFeatures').classList.toggle('open')">
+        <div class="more-trigger-content">
+          <span class="more-title">But wait... there's more.</span>
+          <span class="more-sub">13 additional features — click to explore →</span>
+        </div>
+        <span class="more-caret">+</span>
+      </button>
 
-      <div class="dash-card animate-in">
-        <div class="dash-icon">🏆</div>
-        <h3>Niche Scorecard</h3>
-        <p>Detects natural specializations in your book and scores them. Discover where you have a data-backed niche versus where you think you do. Specialize with proof.</p>
-        <span class="tier-badge tier-a">Core Intelligence</span>
-      </div>
+      <div class="more-content">
+        <!-- Tier A Continued -->
+        <div class="more-tier">
+          <div class="more-tier-header">
+            <span class="tier-label tier-a">Tier A</span>
+            <h3>Primary Differentiation — Continued</h3>
+            <span class="count">7 features</span>
+          </div>
+          <div class="tier-features-grid">
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Portfolio Risk Alerts</div>
+                <div class="feat-desc">Concentration, clustering, and imbalance warnings — prevents revenue loss before it happens</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Predictive Revenue Forecasting</div>
+                <div class="feat-desc">3 / 6 / 12 month projections from book + pipeline signals</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Seasonal Intelligence</div>
+                <div class="feat-desc">Seasonality patterns with predictive forecasts and anonymized benchmarking</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Macro Intelligence Engine</div>
+                <div class="feat-desc">BoC / bond yield / Treasury monitoring → client-level impact actions</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Rate Correlation Timeline</div>
+                <div class="feat-desc">Interactive multi-line chart with real rate data — context for every decision</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Broker Benchmarking</div>
+                <div class="feat-desc">Anonymized platform-wide comparison — see where you stand versus your peers</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">White-Label Client Reports</div>
+                <div class="feat-desc">Broker-branded PDFs for annual reviews — retention tool that writes itself</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <div class="dash-card animate-in">
-        <div class="dash-icon">📅</div>
-        <h3>Renewal &amp; Client Pipeline</h3>
-        <p>Visual timeline of upcoming renewals (12, 6, 3 months out) with outreach triggers. Pipeline health, deal velocity, bottlenecks, and dormant client recovery.</p>
-        <span class="tier-badge tier-b">Enhanced Value</span>
-      </div>
-
-      <div class="dash-card animate-in">
-        <div class="dash-icon">📈</div>
-        <h3>Seasonal Intelligence</h3>
-        <p>Historical seasonality with AI overlay — pattern recognition, predictive forecasts for 3–6 months, capacity planning hints, and anonymized benchmarking.</p>
-        <span class="tier-badge tier-a">Core Intelligence</span>
-      </div>
-
-      <div class="dash-card animate-in">
-        <div class="dash-icon">🏛️</div>
-        <h3>Macro Rate Correlation</h3>
-        <p>Real BoC overnight rate data, GoC bond yields, US Treasury yields, and mortgage rate tracking. Educational context with client-level impact actions.</p>
-        <span class="tier-badge tier-a">Core Intelligence</span>
-      </div>
-
-      <div class="dash-card animate-in">
-        <div class="dash-icon">🤖</div>
-        <h3>Rate Intelligence Bot</h3>
-        <p>Auto-parsed lender rate sheets from your email. A/B/C channel routing cross-references against your book for instant opportunities. Your personal rate library.</p>
-        <span class="tier-badge tier-a">Core Intelligence</span>
+        <!-- Tier B -->
+        <div class="more-tier">
+          <div class="more-tier-header">
+            <span class="tier-label tier-b">Tier B</span>
+            <h3>Enhanced Value</h3>
+            <span class="count">6 features</span>
+          </div>
+          <div class="tier-features-grid">
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Renewal Countdown Dashboard</div>
+                <div class="feat-desc">Visual timeline with automated outreach triggers</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Client Lifecycle Triggers</div>
+                <div class="feat-desc">Anniversary dates, equity milestones, maturity clustering</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Pipeline Health Tracker</div>
+                <div class="feat-desc">Deal velocity, bottleneck detection, probability of close</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Lender Mix Analysis</div>
+                <div class="feat-desc">Volume breakdown by lender with trend and risk context</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Automated Follow-Up Sequences</div>
+                <div class="feat-desc">Context-aware email/text triggered by lifecycle events</div>
+              </div>
+            </div>
+            <div class="tier-feature">
+              <span class="check">✓</span>
+              <div>
+                <div class="feat-name">Deal Velocity Tracking</div>
+                <div class="feat-desc">Submission-to-close timing and lender speed comparison</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1285,193 +1524,6 @@
           <div>
             <h4>Private Channel</h4>
             <p>Private lenders, MICs, bridge financing. Matches against urgent bridge needs, debt consolidation, and short-term solutions.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FULL FEATURE ROADMAP -->
-<section class="features" id="features">
-  <div class="section-inner">
-    <p class="section-label animate-in">Full Feature Roadmap</p>
-    <h2 class="section-title animate-in">Everything MIL Will Do</h2>
-    <p class="section-desc animate-in">Two tiers of intelligence — from AI-driven insights no LOS provides to enhanced versions of the tools brokers use every day.</p>
-
-    <div class="feature-tiers">
-      <!-- TIER A -->
-      <div class="tier-block animate-in">
-        <div class="tier-header">
-          <span class="tier-label tier-a">Tier A</span>
-          <h3>Primary Differentiation</h3>
-          <span class="count">16 features + Niche Development Strategy</span>
-        </div>
-        <div class="tier-features-grid">
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Book Health Score</div>
-              <div class="feat-desc">Composite business health metric with drill-down</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Broker Benchmarking</div>
-              <div class="feat-desc">Anonymized platform-wide comparison</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Rate Impact Analysis</div>
-              <div class="feat-desc">Live rate changes crossed against your book</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Opportunity Detection Engine</div>
-              <div class="feat-desc">Continuous AI scan for actionable opportunities</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Portfolio Risk Alerts</div>
-              <div class="feat-desc">Concentration, clustering, and imbalance warnings</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Predictive Revenue Forecasting</div>
-              <div class="feat-desc">3/6/12 month projections from book + pipeline</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">White-Label Client Reports</div>
-              <div class="feat-desc">Broker-branded PDFs for annual reviews</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Seasonal Intelligence</div>
-              <div class="feat-desc">Seasonality patterns with predictive forecasts</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Dormant Client Recovery</div>
-              <div class="feat-desc">AI-prioritized re-engagement by opportunity value</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Macro Intelligence Engine</div>
-              <div class="feat-desc">BoC/bond monitoring → client-level actions</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Rate Correlation Timeline</div>
-              <div class="feat-desc">Interactive multi-line chart with real rate data</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Rate Intelligence Bot</div>
-              <div class="feat-desc">Auto-parsed lender rate sheets with A/B/C routing</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Living Book Valuation</div>
-              <div class="feat-desc">Real-time multiplier-based book valuation</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Lost Deal Reactivation</div>
-              <div class="feat-desc">Dead files re-evaluated against changed conditions</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">No-Contact Client Recovery</div>
-              <div class="feat-desc">Missing-info clients turned into prioritized call lists</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Multi-File Lifecycle Intelligence</div>
-              <div class="feat-desc">Unified client timelines with predictive next-action</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TIER B -->
-      <div class="tier-block animate-in">
-        <div class="tier-header">
-          <span class="tier-label tier-b">Tier B</span>
-          <h3>Enhanced Value</h3>
-          <span class="count">6 features</span>
-        </div>
-        <div class="tier-features-grid">
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Renewal Countdown Dashboard</div>
-              <div class="feat-desc">Visual timeline with automated outreach triggers</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Client Lifecycle Triggers</div>
-              <div class="feat-desc">Anniversary dates, equity milestones, maturity clustering</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Pipeline Health Tracker</div>
-              <div class="feat-desc">Deal velocity, bottleneck detection, probability of close</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Lender Mix Analysis</div>
-              <div class="feat-desc">Volume breakdown by lender with trend and risk context</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Automated Follow-Up Sequences</div>
-              <div class="feat-desc">Context-aware email/text triggered by lifecycle events</div>
-            </div>
-          </div>
-          <div class="tier-feature">
-            <span class="check">✓</span>
-            <div>
-              <div class="feat-name">Deal Velocity Tracking</div>
-              <div class="feat-desc">Submission-to-close timing and lender speed comparison</div>
-            </div>
           </div>
         </div>
       </div>
